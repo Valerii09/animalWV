@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="quiz_text_size">18sp</dimen> <!-- Размер шрифта для текста вопроса -->
+    <dimen name="quiz_option_text_size">16sp</dimen> <!-- Размер шрифта для текста вариантов ответов -->
+    <dimen name="quiz_button_text_size">18sp</dimen> <!-- Размер шрифта для текста кнопки -->
+</resources>

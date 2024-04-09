@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "370014390508",
+    "project_id": "animal-cb173",
+    "storage_bucket": "animal-cb173.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370014390508:android:29b96ecc90c1c83cd4bdc9",
+        "android_client_info": {
+          "package_name": "com.rhythm.animals.night.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqkJYa-n8kW3pTLyrGsVbmOfcJFmnTv8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
