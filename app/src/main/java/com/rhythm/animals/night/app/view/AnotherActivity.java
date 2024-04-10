@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rhythm.animals.night.app.R;
 import com.rhythm.animals.night.app.model.Question;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,7 +28,7 @@ public class AnotherActivity extends AppCompatActivity {
     private int currentQuestionIndex = 0;
     private int score = 0;
     private List<Question> questions;
-    private List<Integer> selectedOptions = new ArrayList<>(); // Хранит выбранные варианты ответа
+    private List<Integer> selectedOptions = new ArrayList<>();
 
     private TextView questionTextView;
     private LinearLayout optionsLinearLayout;
@@ -62,7 +65,8 @@ public class AnotherActivity extends AppCompatActivity {
         String jsonString = stringBuilder.toString();
 
         Gson gson = new Gson();
-        TypeToken<List<Question>> listType = new TypeToken<List<Question>>() {};
+        TypeToken<List<Question>> listType = new TypeToken<List<Question>>() {
+        };
         questions = gson.fromJson(jsonString, listType.getType());
 
         if (questions != null && !questions.isEmpty()) {
@@ -74,7 +78,7 @@ public class AnotherActivity extends AppCompatActivity {
                 if (selectedOptionIndex != -1) {
                     checkAnswer(selectedOptionIndex);
                 } else {
-                    Toast.makeText(this, "Выберите вариант ответа", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Select an answer", Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -82,9 +86,15 @@ public class AnotherActivity extends AppCompatActivity {
             Toast.makeText(this, "Нет данных для вопросов", Toast.LENGTH_SHORT).show();
         }
 
-        // Находим иконку (ImageView) для кнопки возвращения к предыдущему вопросу
         ImageView pointerImageView = findViewById(R.id.pointer);
-        // Находим иконку (ImageView) для открытия ChooseActivity
+        pointerImageView.setOnClickListener(v -> {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                updateQuestionAndOptions();
+            } else {
+                Toast.makeText(AnotherActivity.this, "This is the first question", Toast.LENGTH_SHORT).show();
+            }
+        });
         ImageView menuImageView = findViewById(R.id.menu);
         menuImageView.setOnClickListener(v -> {
             Intent intent = new Intent(AnotherActivity.this, ChooseActivity.class);
@@ -98,10 +108,7 @@ public class AnotherActivity extends AppCompatActivity {
         questionTextView.setText(currentQuestion.getQuestion());
 
         optionsLinearLayout.removeAllViews();
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(200, 30, 200, 30); // Отступы между кнопками
 
         for (String option : currentQuestion.getOptions()) {
@@ -142,7 +149,9 @@ public class AnotherActivity extends AppCompatActivity {
         Button selectedButton = (Button) optionsLinearLayout.getChildAt(selectedOptionIndex);
 
         if (selectedOptionIndex == correctAnswerIndex) {
-            score++;
+            if (score < questions.size()) { // Проверяем, что количество правильных ответов меньше общего количества вопросов
+                score++;
+            }
             selectedButton.setBackgroundResource(R.drawable.custom_button_background_right);
         } else {
             Button correctButton = (Button) optionsLinearLayout.getChildAt(correctAnswerIndex);
@@ -165,6 +174,7 @@ public class AnotherActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void disableOptionButtons() {
         for (int i = 0; i < optionsLinearLayout.getChildCount(); i++) {

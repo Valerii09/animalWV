@@ -1,5 +1,6 @@
 package com.rhythm.animals.night.app.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,7 +15,7 @@ public class ChooseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose);
 
-        Button factsButton = findViewById(R.id.facts_button);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button factsButton = findViewById(R.id.privacy_policy_button);
         Button quizButton = findViewById(R.id.quiz_button);
 
         factsButton.setOnClickListener(v -> {

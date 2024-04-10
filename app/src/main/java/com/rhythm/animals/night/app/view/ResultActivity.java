@@ -23,7 +23,15 @@ public class ResultActivity extends AppCompatActivity {
         scoreTextView.setText(scoreText);
 
 
-         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView backToChooseTextView = findViewById(R.id.menu);
+         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView backToChooseMenu = findViewById(R.id.menu);
+        backToChooseMenu.setOnClickListener(v -> {
+
+            Intent intent = new Intent(ResultActivity.this, ChooseActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) ImageView backToChooseTextView = findViewById(R.id.pointer);
         backToChooseTextView.setOnClickListener(v -> {
 
             Intent intent = new Intent(ResultActivity.this, ChooseActivity.class);

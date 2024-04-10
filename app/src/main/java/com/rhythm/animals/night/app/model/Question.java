@@ -61,23 +61,10 @@ public class Question implements Parcelable {
         return options;
     }
 
-    public void setOptions(List<String> options) {
-        this.options = options;
-    }
 
     public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
 
-    public boolean isAnsweredCorrectly() {
-        return answeredCorrectly;
-    }
-
-    public void setAnsweredCorrectly(boolean answeredCorrectly) {
-        this.answeredCorrectly = answeredCorrectly;
-    }
 }
